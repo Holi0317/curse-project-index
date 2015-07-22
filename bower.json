@@ -1,0 +1,25 @@
+{
+  "name": "curse-mc-api",
+  "version": "0.0.0",
+  "authors": [
+    "Holi0317 <holliswuhollis@gmail.com>"
+  ],
+  "description": "An unoffical API for curse",
+  "moduleType": [
+    "node"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4",
+    "bootstrap": "~3.3.5",
+    "bootstrap-material-design": "~0.3.0"
+  }
+}
