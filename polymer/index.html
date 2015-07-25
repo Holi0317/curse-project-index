@@ -29,6 +29,7 @@
 
   <link rel="import" href="/elements/app-theme.html">
   <link rel="import" href="/elements/routing.html">
+  <link rel="import" href="/elements/menu-item/menu-item.html">
 </head>
 
 
@@ -43,21 +44,10 @@
           <span class="paper-font-title">Menu</span>
         </paper-toolbar>
 
-        <paper-menu class="list" attr-for-selected="data-route" selected="{{route}}">
-          <a href="/" data-route="home">
-            <iron-icon icon="home"></iron-icon>
-            <span>Home</span>
-          </a>
-
-          <a data-route="docs" href="/docs">
-            <iron-icon icon="book"></iron-icon>
-            <span>docs</span>
-          </a>
-
-          <a data-route="about" href="/about">
-            <iron-icon icon="search"></iron-icon>
-            <span>about</span>
-          </a>
+        <paper-menu class="list" attr-for-selected="name" selected="{{route}}">
+          <menu-item name="home" icon="home" href="/"></menu-item>
+          <menu-item name="docs" icon="book" href="/docs"></menu-item>
+          <menu-item name="about" icon="search" href="/about"></menu-item>
         </paper-menu>
       </div>
 
