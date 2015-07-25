@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#303F9F">
+  <meta name="msapplication-TileColor" content="#3372DF">
+
+  <script src="/bower_components/webcomponentsjs/webcomponents-lite.min.js" type="text/javascript"></script>
+  <title>Curse API</title>
+
+  <link rel="stylesheet" href="/stylesheets/style.css">
+
+  <link rel="import" href="/bower_components/iron-pages/iron-pages.html">
+  <link rel="import" href="/bower_components/iron-icons/iron-icons.html">
+  <link rel="import" href="/bower_components/iron-ajax/iron-ajax.html">
+
+  <link rel="import" href="/bower_components/paper-tabs/paper-tabs.html">
+  <link rel="import" href="/bower_components/paper-header-panel/paper-header-panel.html">
+  <link rel="import" href="/bower_components/paper-toolbar/paper-toolbar.html">
+  <link rel="import" href="/bower_components/paper-icon-button/paper-icon-button.html">
+  <link rel="import" href="/bower_components/paper-drawer-panel/paper-drawer-panel.html">
+  <link rel="import" href="/bower_components/paper-menu/paper-menu.html">
+  <link rel="import" href="/bower_components/paper-material/paper-material.html">
+  <link rel="import" href="/bower_components/paper-button/paper-button.html">
+  <link rel="import" href="/bower_components/paper-item/paper-item.html">
+
+  <link rel="import" href="/elements/app-theme.html">
+  <link rel="import" href="/elements/routing.html">
+</head>
+
+
+<body unresolved class="fullbleed layout vertical">
+
+  <template is="dom-bind" id="app">
+
+    <paper-drawer-panel id="paperDrawerPanel">
+      <div drawer>
+
+        <paper-toolbar id="drawerToolbar">
+          <span class="paper-font-title">Menu</span>
+        </paper-toolbar>
+
+        <paper-menu class="list" attr-for-selected="data-route" selected="{{route}}">
+          <a href="/" data-route="home">
+            <iron-icon icon="home"></iron-icon>
+            <span>Home</span>
+          </a>
+
+          <a data-route="docs" href="/docs">
+            <iron-icon icon="book"></iron-icon>
+            <span>docs</span>
+          </a>
+
+          <a data-route="search" href="/search">
+            <iron-icon icon="search"></iron-icon>
+            <span>search</span>
+          </a>
+        </paper-menu>
+      </div>
+
+      <paper-header-panel main mode="waterfall-tall">
+
+        <!-- Main Toolbar -->
+        <paper-toolbar id="mainToolbar">
+          <!-- <paper-icon-button id="paperToggle" icon="menu" paper-drawer-toggle></paper-icon-button> -->
+          <paper-icon-button icon="menu" id="paperToggle" paper-drawer-toggle></paper-icon-button>
+          <span class="flex"></span>
+          <!-- Application name -->
+          <div class="middle paper-font-display2 app-name">Unoffical curse API</div>
+
+        </paper-toolbar>
+
+        <iron-pages selected="{{route}}" attr-for-selected="data-route">
+
+          <div data-route="home">
+            <h1> Curse API</h1>
+            <p> Provides an API for curseforge, better searching function. </p>
+            <p> Currently, only <a href="http://minecraft.curseforge.com/mc-mods">mc-mods</a> form curse is supported </p>
+            <p> All functions are on the right hand side. Feel free to try them ;)</p>
+            <p> Also, this project is an open source project. You can grab the source form <a href="https://github.com/holi0317/curse-mc-api"> Github</a></p>
+          </div>
+
+          <div data-route="docs">
+            <h1>Curse mc-mods APIv1 Documentation</h1>
+            <paper-material>
+
+              <header>
+                <paper-button raised noink class="get-button">GET</paper-button>
+                /api/v1/list
+              </header>
+
+              <summary>
+                <p>List and search all cached mc-mods.</p>
+              </summary>
+
+              <details>
+                <h3>Query parameter</h3>
+                <p>If undefined is passed in, default will be used</p>
+                <div class="table-responsive">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Key</th>
+                        <th>Accepted value</th>
+                        <th>Description</th>
+                        <th>Default</th>
+                        <th>Reminder</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>page</td>
+                        <td>Number</td>
+                        <td>Requesed page number</td>
+                        <td>1</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>sort</td>
+                        <td>'fancyName', 'slug', 'id_', 'description', 'author', 'downloadCount', 'tags'</td>
+                        <td>Sort result by this</td>
+                        <td>'downloadCount'</td>
+                        <td>This key is case sensitive</td>
+                      </tr>
+                      <tr>
+                        <td>limit</td>
+                        <td>Number, 'all'</td>
+                        <td>Limit result in each page</td>
+                        <td>10</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>search</td>
+                        <td>String</td>
+                        <td>Search fancyName by this. If undefined, list all</td>
+                        <td>undefined</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>fuzzy</td>
+                        <td>Anyting</td>
+                        <td>if this have a value, search fancyNameSoundex instead of fancyName</td>
+                        <td>undefined</td>
+                        <td></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <h3>Result format (JSON)</h3>
+                <div class="table-responsive">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Key</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                        <th>Sample Response</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>id_</td>
+                        <td>Number</td>
+                        <td>Id in curse(forge)</td>
+                        <td>223628</td>
+                      </tr>
+                      <tr>
+                        <td>slug</td>
+                        <td>String</td>
+                        <td>Slug of that mod in curse(forge)</td>
+                        <td>thaumcraft</td>
+                      </tr>
+                      <tr>
+                        <td>fancyName</td>
+                        <td>String</td>
+                        <td>Name displayed</td>
+                        <td>Thaumcraft</td>
+                      </tr>
+                      <tr>
+                        <td>fancyNameSoundex</td>
+                        <td>String</td>
+                        <td>Encoded soundex for fancyName</td>
+                        <td>T526</td>
+                      </tr>
+                      <tr>
+                        <td>fancyNameFlatten</td>
+                        <td>String</td>
+                        <td>fancyName, removed non-word letters and changed to lower case</td>
+                        <td>thaumcraft</td>
+                      </tr>
+                      <tr>
+                        <td>description</td>
+                        <td>String</td>
+                        <td>description from curse</td>
+                        <td>Thaumaturgy is the capability of a magician to work miracles.....</td>
+                      </tr>
+                      <tr>
+                        <td>author</td>
+                        <td>String</td>
+                        <td>Author of the mod</td>
+                        <td>azanor</td>
+                      </tr>
+                      <tr>
+                        <td>downloadCount</td>
+                        <td>Number</td>
+                        <td>Download count from curse</td>
+                        <td>1052980</td>
+                      </tr>
+                      <tr>
+                        <td>tags</td>
+                        <td>Array of String</td>
+                        <td>Tags applied to this mod. String are actually links to the tag</td>
+                        <td>["mc-mods/magic","mc-mods/adventure-rpg","mc-mods/armor-weapons-tools","mc-mods/cosmetic","mc-mods/library-api"]</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </details>
+
+            </paper-material>
+
+
+            <paper-material>
+
+              <header>
+                <paper-button raised noink class="get-button">GET</paper-button>
+                /api/v1/info
+              </header>
+
+              <summary>
+                Information about this tool. Currently only last update time is given
+              </summary>
+
+              <details>
+                <h3>Result format (JSON)</h3>
+                <div class="table-responsive">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Key</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                        <th>Sample Response</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>lastUpdate</td>
+                        <td>String(Date)</td>
+                        <td>Last update date using ISO-8601. YYYY-MM-DDTHH:mm:ss.sssZ</td>
+                        <td>2015-07-21T06:13:03.060Z</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </details>
+            </paper-material>
+
+
+            <paper-material>
+
+              <header>
+                <paper-button raised noink class="get-button">GET</paper-button>
+                /api/v1/tags
+              </header>
+
+              <summary>
+                <p>Get tags from curseforge</p>
+              </summary>
+
+              <details>
+                <h3>Result format(JSON)</h3>
+                <div class="table-responsive">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Key</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>tags</td>
+                        <td>Array of Objects</td>
+                        <td>Tags listed in curseforge. While key is the link and value is human-readable name</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </details>
+            </paper-material>
+          </div>
+
+          <div data-route="search">
+            <iron-ajax url="/api/v1/list" handleAs="json" id="request"
+             params='{"page": {{parm.page}}, "sort": {{parm.sort}}, "limit": {{parm.limit}}, "search": {{parm.search}}, "fuzzy": {{parm.fuzzy}}}'></iron-ajax>
+            <p>search</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          </div>
+        </iron-pages>
+
+      </paper-header-panel>
+
+    </paper-drawer-panel>
+
+  </template>
+
+</body>
+</html>

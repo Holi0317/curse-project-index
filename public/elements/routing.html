@@ -1,0 +1,22 @@
+<script type="text/javascript" src="../bower_components/page/page.js"></script>
+
+<script type="text/javascript">
+  window.addEventListener('WebComponentsReady', function () {
+
+    page('/', function () {
+      app.route = 'home';
+    });
+
+    page('/docs', function () {
+      app.route = 'docs';
+    });
+
+    page('/search', function () {
+      app.route = 'search';
+    });
+
+    page({
+      hashbang: true
+    });
+  });
+</script>

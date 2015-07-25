@@ -26,11 +26,6 @@ router.get('/info', function (req, res, next) {
     });
 });
 
-// API Docs route
-router.get('/docs', function (req, res, next) {
-  res.render('api_docs');
-});
-
 // List and search cached mods
 router.get('/list', function (req, res, next) {
   var parm = {

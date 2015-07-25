@@ -16,9 +16,7 @@
     "mongoose": "^4.0.7",
     "mongoose-paginate": "^4.0.0",
     "morgan": "^1.6.1",
-    "node-cache": "^3.0.0",
     "request": "^2.59.0",
-    "request-promise": "^0.4.2",
     "serve-favicon": "~2.3.0",
     "soundex-encode": "^0.1.2"
   }

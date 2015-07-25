@@ -30,8 +30,8 @@ db.once('open', function () {
   console.log('Database connected');
 });
 
-app.use('/', routes);
 app.use('/api/v1', apiRouter);
+app.use('/', routes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
