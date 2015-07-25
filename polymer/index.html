@@ -25,6 +25,7 @@
   <link rel="import" href="/bower_components/paper-material/paper-material.html">
   <link rel="import" href="/bower_components/paper-button/paper-button.html">
   <link rel="import" href="/bower_components/paper-item/paper-item.html">
+  <link rel="import" href="/bower_components/paper-styles/paper-styles-classes.html">
 
   <link rel="import" href="/elements/app-theme.html">
   <link rel="import" href="/elements/routing.html">
@@ -53,9 +54,9 @@
             <span>docs</span>
           </a>
 
-          <a data-route="search" href="/search">
+          <a data-route="about" href="/about">
             <iron-icon icon="search"></iron-icon>
-            <span>search</span>
+            <span>about</span>
           </a>
         </paper-menu>
       </div>
@@ -64,7 +65,6 @@
 
         <!-- Main Toolbar -->
         <paper-toolbar id="mainToolbar">
-          <!-- <paper-icon-button id="paperToggle" icon="menu" paper-drawer-toggle></paper-icon-button> -->
           <paper-icon-button icon="menu" id="paperToggle" paper-drawer-toggle></paper-icon-button>
           <span class="flex"></span>
           <!-- Application name -->
@@ -75,11 +75,8 @@
         <iron-pages selected="{{route}}" attr-for-selected="data-route">
 
           <div data-route="home">
-            <h1> Curse API</h1>
-            <p> Provides an API for curseforge, better searching function. </p>
-            <p> Currently, only <a href="http://minecraft.curseforge.com/mc-mods">mc-mods</a> form curse is supported </p>
-            <p> All functions are on the right hand side. Feel free to try them ;)</p>
-            <p> Also, this project is an open source project. You can grab the source form <a href="https://github.com/holi0317/curse-mc-api"> Github</a></p>
+            <p> Hello, you are at the home page </p>
+
           </div>
 
           <div data-route="docs">
@@ -294,11 +291,12 @@
             </paper-material>
           </div>
 
-          <div data-route="search">
-            <iron-ajax url="/api/v1/list" handleAs="json" id="request"
-             params='{"page": {{parm.page}}, "sort": {{parm.sort}}, "limit": {{parm.limit}}, "search": {{parm.search}}, "fuzzy": {{parm.fuzzy}}}'></iron-ajax>
-            <p>search</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          <div data-route="about">
+            <h2>About this tool</h2>
+            <p> Provides an API for curseforge, better searching function. </p>
+            <p> Currently, only <a href="http://minecraft.curseforge.com/mc-mods">mc-mods</a> form curse is supported </p>
+            <p> All functions are on the right hand side. Feel free to try them ;)</p>
+            <p> Also, this project is an open source project. You can grab the source form <a href="https://github.com/holi0317/curse-mc-api"> Github</a></p>
           </div>
         </iron-pages>
 

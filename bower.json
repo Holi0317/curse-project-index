@@ -18,9 +18,6 @@
     "tests"
   ],
   "dependencies": {
-    "jquery": "~2.1.4",
-    "bootstrap": "~3.3.5",
-    "bootstrap-material-design": "~0.3.0",
     "polymer": "Polymer/polymer#^1.0.0",
     "page": "visionmedia/page.js#~1.6.3",
     "iron-ajax": "PolymerElements/iron-ajax#1.0.0",
