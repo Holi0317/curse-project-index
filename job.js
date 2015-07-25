@@ -7,12 +7,14 @@ var soundex = require('soundex-encode');
 var mongoose = require('mongoose');
 var models = require('./models');
 
-mongoose.connect('mongodb://localhost/curse');
-var db = mongoose.connection;
-db.on('error', function (err) {throw err;});
-db.once('open', function () {
-  console.log('Database connected');
-});
+if (mongoose.connection.readyState === 0) {
+  // Database is not connecting nor connected, connect to database here
+  mongoose.connect('mongodb://localhost/curse');
+  mongoose.connection.on('error', function (err) {throw err;});
+  mongoose.connection.once('open', function () {
+    console.log('Database connected');
+  });
+}
 
 var url = 'http://minecraft.curseforge.com/mc-mods?page=';
 
@@ -90,7 +92,8 @@ function eachUrl(pageNum, callback) {
   });
 }
 
-module.exports = function (thenCall) {
+module.exports = function () {
+  console.log('Cron job started.');
   request(url + '1', function (error, response, body) {
     if (error) {
       console.warn('Got error when requesting page. ', error );
@@ -153,10 +156,7 @@ module.exports = function (thenCall) {
           callback(null);
 
         });
-      },
-      function (callback) {
-        if (thenCall) thenCall();
-      },
+      }
     ]);
   });
 };
