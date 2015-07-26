@@ -9,6 +9,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 
 <link rel="import" href="/bower_components/paper-styles/paper-styles.html">
+<link rel="import" href="/bower_components/iron-flex-layout/iron-flex-layout.html">
 
 <style is="custom-style">
 
@@ -48,6 +49,15 @@ for further information on custom CSS properties.
 }
 
 /* General styles */
+body {
+  background: #fafafa;
+  font-family: 'RobotoDraft';
+  -webkit-font-smoothing: antialiased;
+  font-style: normal;
+  font-weight: 300;
+  color: #333;
+}
+
 
 #drawerToolbar {
   color: var(--secondary-text-color);
@@ -65,15 +75,15 @@ paper-material {
   background: white;
 }
 
-
-#mainToolbar .middle {
+#mainToolbar .paper-header {
   margin-left: 48px;
+  @apply(--paper-font-subhead);
+  transition: all 0.5s;
 }
 
-#mainToolbar.has-shadow .middle {
-  font-size: 20px;
-  padding-bottom: 0;
-  margin-left: 48px;
+#mainToolbar.medium-tall .paper-header {
+  @apply(--paper-font-title);
+
 }
 
 paper-button.get-button{
@@ -111,6 +121,10 @@ table tr{
 
 tr:nth-child(even) {
   background-color: var(--paper-grey-200);
+}
+
+[content] {
+  @apply(--layout-flex);
 }
 
 /* Height of the scroll area */

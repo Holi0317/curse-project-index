@@ -10,8 +10,6 @@
   <script src="/bower_components/webcomponentsjs/webcomponents-lite.min.js" type="text/javascript"></script>
   <title>Curse API</title>
 
-  <link rel="stylesheet" href="/stylesheets/style.css">
-
   <link rel="import" href="/bower_components/iron-pages/iron-pages.html">
   <link rel="import" href="/bower_components/iron-icons/iron-icons.html">
   <link rel="import" href="/bower_components/iron-ajax/iron-ajax.html">
@@ -52,25 +50,24 @@
         </paper-menu>
       </div>
 
-      <paper-header-panel main mode="waterfall-tall">
+      <paper-header-panel main mode="waterfall-tall" tall-class="medium-tall">
 
         <!-- Main Toolbar -->
         <paper-toolbar id="mainToolbar">
           <paper-icon-button icon="menu" id="paperToggle" paper-drawer-toggle></paper-icon-button>
-          <span class="flex"></span>
           <!-- Application name -->
-          <div class="middle paper-font-display2 app-name paper-header">Unoffical curse API</div>
+          <div class="middle app-name paper-header">Unoffical curse API</div>
 
         </paper-toolbar>
 
         <iron-pages selected="{{route}}" attr-for-selected="data-route">
 
-          <div data-route="home">
+          <div data-route="home" content>
             <p> Hello, you are at the home page </p>
 
           </div>
 
-          <div data-route="docs">
+          <div data-route="docs" content>
             <h1>Curse mc-mods APIv1 Documentation</h1>
             <paper-material>
 
@@ -282,7 +279,7 @@
             </paper-material>
           </div>
 
-          <div data-route="about">
+          <div data-route="about" content>
             <h2>About this tool</h2>
             <p> Provides an API for curseforge, better searching function. </p>
             <p> Currently, only <a href="http://minecraft.curseforge.com/mc-mods">mc-mods</a> form curse is supported </p>
@@ -290,7 +287,7 @@
             <p> Also, this project is an open source project. You can grab the source form <a href="https://github.com/holi0317/curse-mc-api"> Github</a></p>
           </div>
 
-          <div data-route="404">
+          <div data-route="404" content>
             <paper-material>
               <p> Curse has crashed </p>
               <witty-comments></witty-comments>

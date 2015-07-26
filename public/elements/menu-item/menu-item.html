@@ -47,10 +47,10 @@ div.relative {
 
 <template>
   <div class="relative">
-      <a href="{{link}}" data-route="{{name}}">
-        <iron-icon icon="{{icon}}"></iron-icon>
-        <span>{{name}}</span>
-      </a>
+    <a href="{{link}}" data-route="{{name}}">
+      <iron-icon icon="{{icon}}"></iron-icon>
+      <span>{{name}}</span>
+    </a>
     <paper-ripple id="ripple"></paper-ripple>
   </div>
 </template>
@@ -65,14 +65,14 @@ Polymer({
     icon: String,
     link: String,
   },
-
+  
   listeners: {
-'ripple.tab': 'clickA',
-'ripple.click': 'clickA',
-},
-clickA: function (e) {
-this.$$('a').click();
-},
+    'ripple.tab': 'clickA',
+    'ripple.click': 'clickA',
+  },
+  clickA: function (e) {
+    this.$$('a').click();
+  },
 });
 </script>
 
