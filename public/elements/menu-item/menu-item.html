@@ -17,6 +17,7 @@ iron-icon {
 }
 
 a {
+  cursor: pointer;
   text-decoration: none;
   color: var(--menu-link-color);
   display: -ms-flexbox;
@@ -40,7 +41,7 @@ a {
 </style>
 
 <template>
-  <a href="{{herf}}" data-route="{{name}}">
+  <a href="{{link}}" data-route="{{name}}">
     <iron-icon icon="{{icon}}"></iron-icon>
     <span>{{name}}</span>
   </a>
@@ -54,8 +55,8 @@ Polymer({
   properties: {
     name: String,
     icon: String,
-    href: String,
-  }
+    link: String,
+  },
 });
 </script>
 
