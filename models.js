@@ -1,5 +1,4 @@
 var mongoose = require('mongoose');
-var mongoosePaginate = require('mongoose-paginate');
 
 var mcModsSchema = mongoose.Schema({
   id_: Number,
@@ -11,7 +10,7 @@ var mcModsSchema = mongoose.Schema({
   author: String,
   downloadCount: Number,
   tags: [String],
-}).plugin(mongoosePaginate);
+});
 
 var infoSchema = mongoose.Schema({
   lastUpdate: {type: Date, default: Date.now},

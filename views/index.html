@@ -87,7 +87,7 @@
 
                 <details>
                   <h3>Result header</h3>
-                  <p>Other API can also include these headers without listing</p>
+                  <p>Other API can also include these headers without noticing</p>
                   <div class="table-responsive">
                     <table>
                       <thead>
@@ -128,6 +128,7 @@
                 <details>
                   <h3>Query parameter</h3>
                   <p>If undefined is passed in, default will be used</p>
+                  <p>Searching is done by <a href="https://github.com/krisk/Fuse" target="_blank">fuse.js</a> instead of mongodb. Therefore fuzzy search is always available</p>
                   <div class="table-responsive">
                     <table>
                       <thead>
@@ -140,21 +141,15 @@
                       </thead>
                       <tbody>
                         <tr>
-                          <td>page</td>
-                          <td>Number</td>
-                          <td>Requesed page number</td>
-                          <td>1</td>
-                        </tr>
-                        <tr>
                           <td>sort</td>
-                          <td>'fancyname', 'id', 'author', 'downloadCount', 'score'*</td>
+                          <td>'fancyname', 'id', 'author', 'downloadCount'*, 'score'**</td>
                           <td>Sort result by this</td>
                           <td>'downloadCount'</td>
                         </tr>
                         <tr>
                           <td>limit</td>
-                          <td>Number, 'all'</td>
-                          <td>Limit result in each page</td>
+                          <td>Number larger than 0, 'all'</td>
+                          <td>Limit result being returned.</td>
                           <td>10</td>
                         </tr>
                         <tr>
@@ -164,15 +159,16 @@
                           <td>undefined</td>
                         </tr>
                         <tr>
-                          <td>soundex</td>
-                          <td>Anyting</td>
-                          <td>if this have a value, use <a href="https://en.wikipedia.org/wiki/Soundex" target="_blank">soundex</a> to search fancyName</td>
-                          <td>undefined</td>
+                          <td>threshold</td>
+                          <td>A number between 0.0 and 1.0</td>
+                          <td>If search is defined, this will be sent to fuse.js as threshold</td>
+                          <td>0.6</td>
                         </tr>
                       </tbody>
                     </table>
                   </div>
-                  <p>*: score means how similar the string is according to
+                  <p>* downloadcount: This is sorted by decending order</p>
+                  <p>** score: score means how similar the string is according to
                     <a href="https://en.wikipedia.org/wiki/Bitap_algorithm" target="_blank">Bitap algorithm</a>.
                     This is done by the <a href="https://github.com/krisk/Fuse" target="_blank">fuse.js</a> library.
                     If search is none, this will return random result as this sorting is not done in database.
@@ -208,12 +204,6 @@
                           <td>Thaumcraft</td>
                         </tr>
                         <tr>
-                          <td>fancyNameSoundex</td>
-                          <td>String</td>
-                          <td>Encoded soundex for fancyName</td>
-                          <td>T526</td>
-                        </tr>
-                        <tr>
                           <td>description</td>
                           <td>String</td>
                           <td>description from curse</td>
@@ -236,30 +226,6 @@
                           <td>Array of String</td>
                           <td>Tags applied to this mod. String are actually links to the tag</td>
                           <td>["mc-mods/magic","mc-mods/adventure-rpg","mc-mods/armor-weapons-tools","mc-mods/cosmetic","mc-mods/library-api"]</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                  <h3>Result header</h3>
-                  <div class="table-responsive">
-                    <table>
-                      <thead>
-                        <tr>
-                          <th>Key</th>
-                          <th>Description</th>
-                          <th>Example</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>X-length</td>
-                          <td>Length of items in this query</td>
-                          <td>1131</td>
-                        </tr>
-                        <tr>
-                          <td>X-page-count</td>
-                          <td>Total number of pages in this query</td>
-                          <td>114</td>
                         </tr>
                       </tbody>
                     </table>

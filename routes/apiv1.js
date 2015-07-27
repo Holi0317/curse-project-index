@@ -1,6 +1,5 @@
 var express = require('express');
-var soundex = require('soundex-encode');
-var fuse = require('fuse.js');
+var Fuse = require('fuse.js');
 var router = express.Router();
 var models = require('../models');
 
@@ -38,34 +37,39 @@ router.head('/', function (req, res, next) {
 });
 
 router.get('/', function (req, res, next) {
-  var queryParm = {};
+  /*
+  * The master plan: validicate and format params. -> Query and sort from mongo.
+  * -> Create fuse object. -> search and return.
+  */
   var sortMapper = {
     fancyname: 'fancyName',
     id: 'id_',
     author: 'author',
-    downloadcount: 'downloadCount',
+    downloadcount: '-downloadCount',
     score: 'score'  // Would not sort anything in database
   };
 
   var parm = {
-    page: (req.query.page) ? Number(req.query.page): 1,
-    sort: (req.query.sort) ? String(req.query.sort): 'downloadCount',
+    sort: (req.query.sort) ? req.query.sort: 'downloadCount',
     limit: (req.query.limit === 'all') ? Number.MAX_SAFE_INTEGER-1: req.query.limit,
-    search: (req.query.search) ?  req.query.search: '',
-    soundex: (req.query.soundex) ? true: false,
-    sortBy: {}
+    search: (req.query.search) ? req.query.search: '',
+    threshold: (req.query.threshold) ? Number(req.query.threshold): 0.6,
   };
+  var needFuse;
 
   // Section: Validicate
   // Validicate limit parm
   if (!parm.limit) {
+    // undefined
     parm.limit = 10;
   } else if (isNaN(parm.limit)) {
+    // Not a number nor 'all'
     res.status(400).json({
       'message': 'Incorrect limit parameter. Only "all", undefined and Number larger than 0 is accepted'
     });
     return;
   } else if (parm.limit < 1) {
+    // Less than 1. Kidding?
     res.status(400).json({
       'message': 'How can I give you less than 1 data?'
     });
@@ -74,6 +78,7 @@ router.get('/', function (req, res, next) {
 
   // Validicate sort parameter
   if (typeof sortMapper[parm.sort.toLowerCase()] === 'undefined') {
+    // Key not in sortMapper. Incorrect parameter
     res.status(400).json({
       'message': 'Incorrect sort parameter.'
     });
@@ -82,49 +87,46 @@ router.get('/', function (req, res, next) {
     parm.sort = sortMapper[parm.sort.toLowerCase()];
   }
 
-  // Validicate page
-  if (isNaN(parm.page) || parm.page < 0) {
+  // Query parm
+  if (!parm.search) {
+    // Undefined
+    needFuse = false;
+  } else {
+    // Requires fuse to search
+    needFuse = true;
+    parm.limit = Number.MAX_SAFE_INTEGER-1;
+  }
+
+  // threshold
+  if (isNaN(parm.threshold) || parm.threshold < 0 || parm.threshold > 1) {
     res.status(400).json({
-      'message': 'Incorrect page parameter. Only number that is larger than 0 and undefined is accepted.'
+      'message': 'Threshold should be an number between 0 and 1'
     });
     return;
   }
 
-  // Query parm
-  if (!parm.search) {
-    // No-op
-  } else if (parm.soundex) {
-    queryParm.fancyNameSoundex = soundex(parm.search);
-  } else {
-    queryParm.fancyNameFlatten = {
-      $regex: new RegExp(parm.search.replace(/[^a-zA-Z0-9]/g, '').toLowerCase())
-    };
-  }
-
-  parm.sortBy[parm.sort] = -1;
-
   // Section: query and return
-  models['mc-mods'].paginate(queryParm, {
-    page: parm.page,
-    limit: parm.limit,
-    sortBy: parm.sortBy,
-    columns: '-_id id_ slug fancyName fancyNameSoundex description author downloadCount tags',
-  }, function (err, results, pageCount, itemCount) {
+  models['mc-mods']
+  .find({})
+  .sort(parm.sort)
+  .limit(parm.limit)
+  .select('-_id id_ slug fancyName description author downloadCount tags')
+  .exec(function (err, results) {
     if (err) {
       console.error('Error when querying mc-mods. Error: ', err);
       res.status(500).json({'message': 'Query error. See server log for details'});
       return;
     }
-    res.set({
-      'X-page-count': pageCount,
-      'X-length': itemCount
-    });
-    if (parm.sort !== 'sort') res.json(results);
-    else {
-      res.json(new fuse(results, {
-        keys: ["fancyName"],
-        threshold: 1,
-      }).search(parm.search));
+
+    if (needFuse) {
+      var fuse = new Fuse(results, {
+        keys: ['fancyName'],
+        threshold: parm.threshold,
+        shouldSort: parm.sort === 'score',
+      });
+      res.json(fuse.search(parm.search).slice(0, parm.limit));
+    } else {
+      res.json(results);
     }
   });
 

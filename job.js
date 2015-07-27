@@ -3,7 +3,6 @@ var request = require('request');
 var cheerio = require('cheerio');
 var fs = require('fs');
 var path = require('path');
-var soundex = require('soundex-encode');
 var mongoose = require('mongoose');
 var models = require('./models');
 
@@ -33,8 +32,6 @@ function parseList(body) {
       var slugAndId = $.find('div.info.name > a').attr('href').split('/').slice(-1)[0].split('-');
       models['mc-mods'].create({
         fancyName: $.find('div.info.name > a').text(),
-        fancyNameSoundex: soundex($.find('div.info.name > a').text()),
-        fancyNameFlatten: $.find('div.info.name > a').text().replace(/[^a-zA-Z0-9]/g, '').toLowerCase(),
         id_: slugAndId.shift(),
         slug: slugAndId.join('-'),
         description: $.find('div.description p').text(),

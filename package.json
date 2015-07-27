@@ -20,6 +20,5 @@
     "morgan": "^1.6.1",
     "request": "^2.59.0",
     "serve-favicon": "~2.3.0",
-    "soundex-encode": "^0.1.2"
   }
 }
