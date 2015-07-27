@@ -8,7 +8,7 @@
   <meta name="msapplication-TileColor" content="#3372DF">
 
   <script src="/bower_components/webcomponentsjs/webcomponents-lite.min.js" type="text/javascript"></script>
-  <title>Curse API</title>
+  <title>Curse project search</title>
 
   <link rel="import" href="/bower_components/iron-pages/iron-pages.html">
   <link rel="import" href="/bower_components/iron-icons/iron-icons.html">
@@ -56,7 +56,7 @@
         <paper-toolbar id="mainToolbar">
           <paper-icon-button icon="menu" id="paperToggle" paper-drawer-toggle></paper-icon-button>
           <!-- Application name -->
-          <div class="middle app-name paper-header">Unoffical curse API</div>
+          <div class="middle app-name paper-header">Curse project search</div>
 
         </paper-toolbar>
 
@@ -69,6 +69,10 @@
 
           <div data-route="docs" content>
             <h1>Curse mc-mods APIv1 Documentation</h1>
+            <p>
+              This REST API aims to provied an index for mc-mods on <a href="http://minecraft.curseforge.com/mc-mods" target="_blank">curseforge</a>.
+              If you would like to find more informations about an entry, consider use <a href="http://widget.mcf.li/" target="_blank">Curse Download Widget API</a>.
+             </p>
             <paper-material>
 
               <header>
@@ -290,7 +294,7 @@
                         <tr>
                           <td>tags</td>
                           <td>Array of Objects</td>
-                          <td>Tags listed in curseforge. While key is the link and value is human-readable name</td>
+                          <td>Tags listed in curseforge. While key is human-readable name and value is the link to that tag</td>
                         </tr>
                       </tbody>
                     </table>

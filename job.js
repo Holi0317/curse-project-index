@@ -25,9 +25,6 @@ function parseList(body) {
   /*
   * Parse curseforge.com list content and directly append to mods
   * @parm body: html content fetched from minecraft.curseforge.com/mc-mods
-  * @mods.push (object) Parsed content. Following the schema in next line
-  * Schema: {slug:String, id:String, fancyName:String, author:String, tags[String], description:String}
-  * tags: A String of url(or slug for tags?)
   */
   var $ = cheerio.load(body);
   $('li.project-list-item div.details').each(function () {
@@ -67,18 +64,7 @@ function getTags(body) {
   $('ul.listing ul a.level-categories-text').each(function () {
     var link = cheerio(this).attr('href').split('/');
     var name = cheerio(this).text();
-    if (link.length === 3) {
-      // Not a sub-tag. Doesnt mean it does not have sub-tag
-      result[link.slice(-1)[0]] = name;
-    } else if (link.length === 4) {
-      // Inside one sub-tag
-      var parent = link.slice(-2)[0];
-      if (typeof result[parent]  == 'string' || typeof result[parent] == 'undefined') {
-        // First sub-tag encountered
-        result[parent] = {};
-      }
-      result[parent][parent + '/' + link.slice(-1)[0]] = name;
-    }
+    result[name] = link.slice(2).join('/');
   });
   return result;
 }
