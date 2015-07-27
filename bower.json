@@ -35,12 +35,14 @@
     "paper-item": "PolymerElements/paper-item#^1.0.0",
     "paper-material": "PolymerElements/paper-material#^1.0.0",
     "paper-menu": "PolymerElements/paper-menu#^1.0.0",
-    "paper-tabs": "PolymerElements/paper-tabs#^1.0.0",
     "iron-pages": "PolymerElements/iron-pages#~1.0.2",
     "paper-header-panel": "PolymerElements/paper-header-panel#~1.0.3",
     "paper-toolbar": "PolymerElements/paper-toolbar#~1.0.4",
     "paper-ripple": "PolymerElements/paper-ripple#~1.0.1",
-    "iron-collapse": "PolymerElements/iron-collapse#~1.0.2",
-    "paper-styles": "PolymerElements/paper-styles#~1.0.11"
+    "paper-styles": "PolymerElements/paper-styles#~1.0.11",
+    "htmlgl": "*"
+  },
+  "resolutions": {
+    "promise-polyfill": "~2.0.0"
   }
 }
