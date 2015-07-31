@@ -11,7 +11,7 @@ Currently, only minecraft mods is listed in my database, as I do not play other 
 Reminder: I am not a UI designer and I know how terrible the UI is. I have tried >.>
 
 ## Usage
-This will be deployed to my server soon(TM), after some changes.
+[Deployed site](https://cps.holi0317.net/)
 
 ## Deploy your own
 1. Install `node.js, npm, mongodb, git` in your system.
