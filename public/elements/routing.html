@@ -2,6 +2,11 @@
 
 <script type="text/javascript">
 window.addEventListener('WebComponentsReady', function () {
+  page.base('/');
+  
+  page({
+    hashbang: true
+  });
 
   page('/', function () {
     app.route = 'home';
@@ -17,10 +22,6 @@ window.addEventListener('WebComponentsReady', function () {
 
   page('*', function () {
     app.route = '404';
-  });
-
-  page({
-    hashbang: true
   });
 });
 </script>
