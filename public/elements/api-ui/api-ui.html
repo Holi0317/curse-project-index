@@ -1,0 +1,210 @@
+<!--
+User interface for this api
+-->
+
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../bower_components/iron-collapse/iron-collapse.html">
+
+<link rel="import" href="../../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/paper-material/paper-material.html">
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../bower_components/paper-slider/paper-slider.html">
+<link rel="import" href="../../bower_components/paper-tooltip/paper-tooltip.html">
+<link rel="import" href="../../bower_components/paper-menu-button/paper-menu-button.html">
+<link rel="import" href="../../bower_components/paper-spinner/paper-spinner.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+
+<dom-module id="api-ui">
+<style>
+iron-icon {
+  margin: 5px;
+  margin-right: 10px;
+}
+paper-material {
+  padding: 5px;
+}
+#search {
+  flex-basis: 100%;
+}
+iron-icon.small {
+  --iron-icon-height: 16px;
+  --iron-icon-width: 16px;
+}
+#advance-search ::content label {
+  opacity: 0.70;
+}
+hr {
+  opacity: 0.12;
+  margin: 5px 0;
+}
+[secondary] {
+  opacity: 0.7;
+}
+#spin {
+  margin: 10px;
+}
+#spinner {
+  display: none;
+}
+paper-fab {
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+}
+.nospeciallink {
+  color: black;
+  text-decoration: none;
+}
+.name {
+  opacity: 0.87;
+}
+.author {
+  opacity: 0.54;
+}
+</style>
+
+<template>
+  <iron-ajax url="/api/v1/mc-mods" handle-as="json" id="request" params='{{params}}' last-response='{{ajaxResponse}}'></iron-ajax>
+
+  <paper-material class="layout horizontal" elevation=2>
+    <iron-icon icon="search"></iron-icon>
+    <paper-input label="Search" id="search" no-label-float maxlength=32 value={{params.search}}></paper-input>
+    <paper-icon-button icon="more-vert" on-click="toggleSearch"></paper-icon-button>
+  </paper-material>
+
+  <iron-collapse id="advance-search">
+    <paper-material elevation=2>
+      <p>Advanced search filter</p>
+
+      <div>
+        <label>Threshold</label>
+        <paper-slider min="0" max="10" value="{{fakeThreshold}}" id="threshold"></paper-slider>
+      </div>
+
+      <div>
+        <label>Sort</label>
+        <!-- TODO: Use paper-dropdown-menu when ready  -->
+        <paper-menu-button>
+          <paper-icon-button icon="menu" class="dropdown-trigger"></paper-icon-button>
+          <paper-menu class="dropdown-content" attr-for-selected="name" selected={{params.sort}} id="sort">
+            <paper-item name="downloadCount">Download count</paper-item>
+            <paper-item name="fancyName">Name</paper-item>
+            <paper-item name="id">Id</paper-item>
+            <paper-item name="author">Author name</paper-item>
+            <paper-item name="score">score
+              <iron-icon icon="help" class="small">
+              </iron-icon>
+              <paper-tooltip>How similar the search string is</paper-tooltip>
+            </paper-item>
+          </paper-menu>
+        </paper-menu-button>
+      </div>
+    </paper-material>
+  </iron-collapse>
+
+  <br>
+
+  <paper-material elevation=1>
+    <hr>
+    <template is="dom-repeat" items="{{ajaxResponse}}">
+      <paper-item>
+        <paper-item-body two-line>
+          <a href={{getLink(item.id_,item.slug)}} class="nospeciallink">
+            <div>
+              <span class="name">{{item.fancyName}}</span>
+              <span class="author"> by</span>
+              <span class="author">{{item.author}}</span>
+            </div>
+            <div secondary>{{item.description}}</div>
+          </a>
+        </paper-item-body>
+      </paper-item>
+      <hr>
+    </template>
+  </paper-material>
+
+  <div class="layout horizontal center-justified" id="spin">
+    <paper-button raised id="loadbutton">Load remaining</paper-button>
+    <paper-spinner active id="spinner"></paper-spinner>
+  </div>
+
+</template>
+
+<script>
+Polymer({
+  is: 'api-ui',
+  listeners: {
+    'search.keypress': 'pressSearch',
+    'threshold.value-changed': 'request',
+    'sort.selected-changed': 'request',
+    'loadbutton.click': 'load',
+  },
+  ready: function () {
+    // Vars
+    this.fakeThreshold = 6;
+    this.params = {
+      sort: 'downloadCount',
+      threshold: 0.6,
+      search: '',
+      limit: 30
+    };
+    this.isFirstSearch = true;
+
+    // Listen ajax request
+    this.$.request.addEventListener('error', function (err) {
+      console.error('Error when requesting. Error: ', err);
+    });
+
+    // First request
+    this.genRequest();
+  },
+
+  toggleSearch: function () {
+    this.$['advance-search'].toggle();
+  },
+
+  request: function () {
+    // params changed. Wait for 2 secs and request
+    if (this.timeout) window.clearTimeout(this.timeout);
+
+    var that = this;
+    this.timeout = setTimeout(function () {
+      that.genRequest();
+    }, 2000);
+  },
+  genRequest: function () {
+    this.params.threshold = this.fakeThreshold / 10;
+    if (this.timeout) window.clearTimeout(this.timeout);
+    this.$.request.generateRequest();
+  },
+
+  pressSearch: function (e) {
+    if (this.isFirstSearch) {
+      // First time to search. Set sorting to score.
+      console.log('set to score');
+      this.isFirstSearch = false;
+      this.set('params.sort', 'score');
+    }
+    if (e.keyCode === 13) {
+      // Pressed enter. Generate request now
+      this.genRequest();
+    } else {
+      this.request();
+    }
+  },
+  load: function () {
+    this.$.spinner.style.display = 'inline-block';
+    this.$.loadbutton.style.display = 'none';
+
+    this.params.limit = 'all';
+    this.genRequest();
+  },
+  getLink: function (id, slug) {
+    return 'http://minecraft.curseforge.com/mc-mods/' + id + '-' + slug
+  }
+});
+</script>
+</dom-module>

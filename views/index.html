@@ -15,7 +15,7 @@
   <link rel="import" href="/bower_components/iron-ajax/iron-ajax.html">
 
   <link rel="import" href="/bower_components/paper-tabs/paper-tabs.html">
-  <link rel="import" href="/bower_components/paper-header-panel/paper-header-panel.html">
+  <link rel="import" href="/bower_components/paper-scroll-header-panel/paper-scroll-header-panel.html">
   <link rel="import" href="/bower_components/paper-toolbar/paper-toolbar.html">
   <link rel="import" href="/bower_components/paper-icon-button/paper-icon-button.html">
   <link rel="import" href="/bower_components/paper-drawer-panel/paper-drawer-panel.html">
@@ -29,6 +29,7 @@
   <link rel="import" href="/elements/routing.html">
   <link rel="import" href="/elements/menu-item/menu-item.html">
   <link rel="import" href="/elements/witty-comments/witty-comments.html">
+  <link rel="import" href="/elements/api-ui/api-ui.html">
 </head>
 
 
@@ -50,21 +51,20 @@
         </paper-menu>
       </div>
 
-      <paper-header-panel main mode="waterfall-tall" tall-class="medium-tall">
+      <paper-scroll-header-panel main condenses keep-condensed-header>
 
         <!-- Main Toolbar -->
-        <paper-toolbar id="mainToolbar">
+        <paper-toolbar id="mainToolbar" class="tall">
           <paper-icon-button icon="menu" id="paperToggle" paper-drawer-toggle></paper-icon-button>
           <!-- Application name -->
-          <div class="middle app-name paper-header">Curse project search</div>
+          <div class="bottom app-name paper-header">Curse project search</div>
 
         </paper-toolbar>
 
         <iron-pages selected="{{route}}" attr-for-selected="data-route">
 
           <div data-route="home" content>
-            <p> Hello, you are at the home page </p>
-
+            <api-ui></api-ui>
           </div>
 
           <div data-route="docs" content>
@@ -154,7 +154,7 @@
                         </tr>
                         <tr>
                           <td>search</td>
-                          <td>String</td>
+                          <td>String, length less than 32</td>
                           <td>Search fancyName by this. If undefined, list all</td>
                           <td>undefined</td>
                         </tr>
@@ -286,7 +286,7 @@
             </paper-material>
           </iron-pages>
 
-        </paper-header-panel>
+        </paper-scroll-header-panel>
 
       </paper-drawer-panel>
 

@@ -91,6 +91,11 @@ router.get('/', function (req, res, next) {
   if (!parm.search) {
     // Undefined
     needFuse = false;
+  } else if (parm.search > 32) {
+    res.status(400).json({
+      'message': 'Search string length must be less than 32. #Blame fuse.js'
+    });
+    return;
   } else {
     // Requires fuse to search
     needFuse = true;
