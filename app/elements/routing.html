@@ -2,26 +2,30 @@
 
 <script type="text/javascript">
 window.addEventListener('WebComponentsReady', function () {
-  page.base('/');
-  
-  page({
-    hashbang: true
-  });
+  // page.base('/');
 
   page('/', function () {
+    console.log('home');
     app.route = 'home';
+    console.log(app);
   });
 
   page('/docs', function () {
+    console.log('docs');
     app.route = 'docs';
   });
 
   page('/about', function () {
+    console.log('about');
     app.route = 'about';
   });
 
   page('*', function () {
+    console.log('404');
     app.route = '404';
+  });
+  page({
+    hashbang: true
   });
 });
 </script>
