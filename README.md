@@ -19,9 +19,10 @@ This will be deployed to my server soon(TM), after some changes.
 3. Clone this repository
 4. Goto the cloned directory and run `npm i & bower install`
 5. Run mongodb in your system. Please check your distro's wiki for details.
-6. Run `npm start` to run the server.
-7. Run `node -e 'require('./job')()'` to manually update the database.
-8. Done ;)
+6. (If you would like to run this app under a subdirectory) change views/index.html:9 `<base href="/">`, the `/` to base url
+7. Run `npm start` to run the server.
+8. Run `node -e "require('./job')()"` to manually update the database. Please manually kill it when you see `Finished cron job`.
+9. Done ;)
 
 ## TO-DO
 1. Make a gulp script for vulcanize, minify before serving. 700kb is way too large.
