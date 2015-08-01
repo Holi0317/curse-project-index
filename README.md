@@ -13,6 +13,13 @@ Reminder: I am not a UI designer and I know how terrible the UI is. I have tried
 ## Usage
 [Deployed site](https://cps.holi0317.net/)
 
+## Version naming
+Version format: <Major>:<Minor>:<Patch>
+
+This follows [Semantic Versioning](http://semver.org/). While Major version number always equal to the latest API version.
+
+TL;DR: Major is API version, Minor means new function and patch means function changed without breaking compatibility
+
 ## Deploy your own
 1. Install `node.js, npm, mongodb, git` in your system.
 2. Run `npm i -g bower`. you may need to add `sudo` as prefix if you need it.
@@ -29,6 +36,4 @@ Reminder: I am not a UI designer and I know how terrible the UI is. I have tried
 3. Run `npm prune && bower prune && bower i && npm i --dev && gulp`
 
 ## TO-DO
-1. Make a gulp script for vulcanize, minify before serving. 700kb is way too large.
-2. Wait for paper-dropdown-menu
-3. Make a shell script for changing base url and update
+1. Wait for paper-dropdown-menu
