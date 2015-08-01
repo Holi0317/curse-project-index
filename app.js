@@ -11,7 +11,7 @@ mongoose.connection.once('open', function () {
 });
 
 var routes = require('./routes/index');
-var apiRouter = require('./routes/apiv1');
+var apiRouter = require('./routes/api');
 var job = require('./job');
 
 var app = express();
@@ -26,7 +26,7 @@ app.use(logger('dev'));
 app.use(express.static(path.join(__dirname, 'dist')));
 
 app.use('/', routes);
-app.use('/api/v1/mc-mods', apiRouter);
+app.use('/api', apiRouter);
 app.get('*', function(req, res){
   res.status(404).send('Sorry. But I got a 404');
 });

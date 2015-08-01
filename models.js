@@ -4,8 +4,6 @@ var mcModsSchema = mongoose.Schema({
   id_: Number,
   slug: String,
   fancyName: String,
-  fancyNameSoundex: String,
-  fancyNameFlatten: String,
   description: String,
   author: String,
   downloadCount: Number,
@@ -14,10 +12,15 @@ var mcModsSchema = mongoose.Schema({
 
 var infoSchema = mongoose.Schema({
   lastUpdate: {type: Date, default: Date.now},
-  tags: {}
+});
+
+var tagSchema = mongoose.Schema({
+  scope: String,
+  tags: {},
 });
 
 module.exports = {
   'mc-mods': mongoose.model('mc-mods', mcModsSchema),
-  'info': mongoose.model('info', infoSchema)
+  'info': mongoose.model('info', infoSchema),
+  'tags': mongoose.model('tags', tagSchema)
 };

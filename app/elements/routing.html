@@ -2,23 +2,42 @@
 
 <script type="text/javascript">
 window.addEventListener('WebComponentsReady', function () {
-  // page.base('/');
-
   page('/', function () {
-    app.route = 'home';
+    app.route = '/';
   });
 
   page('/docs', function () {
-    app.route = 'docs';
+    app.route = '/docs';
+  });
+
+  page('/docs/error', function () {
+    app.route = '/docs/error';
+  });
+
+  page('/docs/api', function () {
+    app.route = '/docs/api';
+  });
+
+  page('/docs/api/v1', function () {
+    app.route = '/docs/api/v1';
+  });
+
+  page('/docs/api/v1/tags', function () {
+    app.route = '/docs/api/v1/tags';
+  });
+
+  page('/docs/api/v1/scope', function () {
+    app.route = '/docs/api/v1/scope';
   });
 
   page('/about', function () {
-    app.route = 'about';
+    app.route = '/about';
   });
 
   page('*', function () {
     app.route = '404';
   });
+
   page({
     hashbang: true
   });

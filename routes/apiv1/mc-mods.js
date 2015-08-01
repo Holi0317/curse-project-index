@@ -1,7 +1,7 @@
 var express = require('express');
 var Fuse = require('fuse.js');
 var router = express.Router();
-var models = require('../models');
+var models = require('../../models');
 
 Array.prototype.contains = function(element){
   return this.indexOf(element) > -1;

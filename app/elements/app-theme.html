@@ -58,6 +58,14 @@ body {
   color: #333;
 }
 
+a {
+  color: #3367D6;
+}
+
+hr {
+  opacity: 0.12;
+  margin: 5px 0;
+}
 
 #drawerToolbar {
   color: var(--secondary-text-color);
@@ -86,17 +94,23 @@ paper-material {
 
 }
 
-paper-button.get-button{
+paper-button.green {
   background: var(--paper-green-500);
-  color: white;
 }
 
-paper-button.head-button {
+paper-button.blue {
   background: var(--paper-blue-500);
-  color: white;
 }
 
-div[data-route='docs'] header {
+paper-button.purple {
+  background: var(--paper-purple-500);
+}
+
+paper-button.red {
+  background: var(--paper-red-500);
+}
+
+header {
   padding: 14px 0;
   border-bottom: 1px solid #E5E5E5;
   font-size: 20px;
@@ -104,18 +118,19 @@ div[data-route='docs'] header {
   line-height: 28px;
 }
 
-div[data-route='docs'] paper-button {
+paper-button {
   line-height: 15px;
+  color: white;
 }
 
-div[data-route='docs'] table {
+table {
   width: 100%;
   margin: 12px 0;
   border-top: 1px solid #E5E5E5;
   border-collapse: collapse;
 }
 
-div[data-route='docs'] tr {
+tr {
   border-bottom: 1px solid #E5E5E5;
   padding: 0 18px;
 }

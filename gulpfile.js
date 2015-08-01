@@ -4,6 +4,7 @@
   var $ = require('gulp-load-plugins')();
   var del = require('del');
   var runSequence = require('run-sequence');
+  var markdown = require('marked');
 
   gulp.task('vulcanize', function () {
     return gulp.src('app/elements/elements.html')
@@ -15,7 +16,14 @@
   });
 
   gulp.task('html', function () {
-    return gulp.src('app/*.html')
+    return gulp.src('app/index.html')
+    .pipe($.fileInclude({
+      prefix: '@@',
+      basepath: '@file',
+      filters: {
+        markdown: markdown
+      }
+    }))
     .pipe($.htmlmin({
       removeComments: true,
       collapseWhitespace: true,
@@ -46,10 +54,11 @@
   });
 
   gulp.task('watch', function () {
-    var html = gulp.watch('app/*.index', ['html']);
+    var html = gulp.watch('app/index.html', ['html']);
     var elements = gulp.watch('app/elements/**/*', function () {
       return runSequence('copy:elements', 'vulcanize');
     });
+    var md = gulp.watch('app/docs/**/*.md', ['html']);
 
     var log = function (event) {
       console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
@@ -57,6 +66,7 @@
 
     html.on('change', log);
     elements.on('change', log);
+    md.on('change', log);
   });
 
   gulp.task('default', function (cb) {
