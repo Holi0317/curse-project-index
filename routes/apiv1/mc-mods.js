@@ -1,5 +1,6 @@
 var express = require('express');
 var Fuse = require('fuse.js');
+var async = require('async');
 var router = express.Router();
 var models = require('../../models');
 
@@ -129,27 +130,20 @@ router.get('/', function (req, res, next) {
         threshold: parm.threshold,
         shouldSort: parm.sort === 'score',
       });
-      res.json(fuse.search(parm.search).slice(0, parm.limit));
+      var fuseAsync = async.asyncify(fuse.search.bind(fuse));
+      fuseAsync(parm.search, function (error, result) {
+        if (error) {
+          console.error(error);
+          res.status(500).json({'message': 'Query error. See server log for details'});
+          return;
+        }
+        res.json(result);
+      });
     } else {
       res.json(results);
     }
   });
 
-});
-
-// List all tags
-router.get('/tags', function (req, res, next) {
-  models.info
-  .findOne({})
-  .select('tags')
-  .exec(function (err, data) {
-    if (err) {
-      res.status(500).json({'message': 'Query error. See server log for details'});
-      console.error('Error when querying tags. Error: ', err);
-      return;
-    }
-    res.json(data.tags);
-  });
 });
 
 
