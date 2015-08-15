@@ -13,7 +13,7 @@ User interface for this api
 <link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../../bower_components/paper-slider/paper-slider.html">
 <link rel="import" href="../../bower_components/paper-tooltip/paper-tooltip.html">
-<link rel="import" href="../../bower_components/paper-menu-button/paper-menu-button.html">
+<link rel="import" href="../../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
 <link rel="import" href="../../bower_components/paper-spinner/paper-spinner.html">
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 
@@ -86,9 +86,7 @@ paper-fab {
 
       <div>
         <label>Sort</label>
-        <!-- TODO: Use paper-dropdown-menu when ready  -->
-        <paper-menu-button>
-          <paper-icon-button icon="menu" class="dropdown-trigger"></paper-icon-button>
+        <paper-dropdown-menu>
           <paper-menu class="dropdown-content" attr-for-selected="name" selected={{params.sort}} id="sort">
             <paper-item name="downloadCount">Download count</paper-item>
             <paper-item name="fancyName">Name</paper-item>
@@ -100,7 +98,7 @@ paper-fab {
               <paper-tooltip>How similar the search string is</paper-tooltip>
             </paper-item>
           </paper-menu>
-        </paper-menu-button>
+        </paper-dropdown-menu>
       </div>
     </paper-material>
   </iron-collapse>
@@ -203,7 +201,7 @@ Polymer({
     this.genRequest();
   },
   getLink: function (id, slug) {
-    return 'http://minecraft.curseforge.com/mc-mods/' + id + '-' + slug
+    return 'http://minecraft.curseforge.com/mc-mods/' + id + '-' + slug;
   }
 });
 </script>
