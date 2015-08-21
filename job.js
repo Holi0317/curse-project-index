@@ -206,7 +206,7 @@ function fetchScope(scope, callback) {
 
 }
 
-function main() {
+function main(cb) {
   console.log('Cron job started.');
 
   async.series([
@@ -227,11 +227,15 @@ function main() {
       console.log('Cron job finished');
       callback();
     }
-  ]);
+  ], function (err, result) {
+    if (cb) return cb();
+  });
 }
 
 module.exports = main;
 
 if (require.main === module) {
-    main();
+    main(function () {
+      process.exit();
+    });
 }

@@ -8,7 +8,7 @@ The main goal was, originally, to create an API for curseforge. However, during 
 
 Currently, only minecraft mods is listed in my database, as I do not play other games ;p
 
-Reminder: I am not a UI designer and I know how terrible the UI is. I have tried >.>
+Disclaimer: I am not a UI designer and I know how terrible the UI is. I have tried >.>
 
 ## Usage
 [Deployed site](https://cps.holi0317.net/)
@@ -26,8 +26,8 @@ TL;DR: Major is API version, Minor means new function and patch means function c
 3. Clone this repository
 4. Goto the cloned directory and run `bower i && npm i --dev && gulp`
 5. Run mongodb in your system. Please check your distro's wiki for details.
-6. Run `npm start` to run the server.
-7. Run `node -e "require('./job')()"` to manually update the database. Please manually kill it when you see `Finished cron job`.
+6. Run `node job` to manually update the database.
+7. Run `npm start` to run the server.
 8. Done ;)
 
 ## Update
