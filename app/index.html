@@ -52,256 +52,302 @@
             <h1>Curse mc-mods APIv1 Documentation</h1>
             <p>This REST API aims to provied an index for mc-mods on <a href="http://minecraft.curseforge.com/" target="_blank">curseforge</a>.</p>
             <p>If you would like to find more informations about an entry, consider use <a href="http://widget.mcf.li/" target="_blank">Curse Download Widget API</a>.
-            I may, if appropiate, add same functionality of curse download widget API into this tool.</p>
-            <p>There is no way to add other games into index without breaking backward compability. Therefore, adding other game will not be available unitl version 2.</p>
+              I may, if appropiate, add same functionality of curse download widget API into this tool.</p>
+              <p>There is no way to add other games into index without breaking backward compability. Therefore, adding other game will not be available unitl version 2.</p>
 
-
-            <hr>
-
-            <h2>General information</h2>
-            <paper-material>
-              <h3>Scope</h3>
-              <p>Scope generally the name of a collection of projects.
-                However, instead of using names that we commonly use, scope uses names that is shorter and save them in a database.</p>
-                <p>Currently supported scope: </p>
-                <p><a href="http://minecraft.curseforge.com/mc-mods" target="_blank">Minecraft mods (mc-mods)</a></p>
-              </paper-material>
-
-              <paper-material>
-                <h3>Update time</h3>
-                <p>This database will be updated automatically on everyday, 00:00 GMT.</p>
-                <p>However, as update script contains some synchronize function, Server respond will become slower than normal</p>
-              </paper-material>
 
               <hr>
 
-              <h2>API content</h2>
+              <h2>General information</h2>
               <paper-material>
-                <p><a href="/docs/error">Error response</a></p>
-                <p><a href="/docs/api">/api</a></p>
-                <p><a href="/docs/api/v1">/api/v1</a></p>
-                <p><a href="/docs/api/v1/tags">/api/v1/tags</a></p>
-                <p><a href="/docs/api/v1/scope">/api/v1/:scope</a></p>
-              </paper-material>
+                <h3>Scope</h3>
+                <p>Scope generally the name of a collection of projects.
+                  However, instead of using names that we commonly use, scope uses names that is shorter and save them in a database.</p>
+                  <p>Currently supported scope: </p>
+                  <p><a href="http://minecraft.curseforge.com/mc-mods" target="_blank">Minecraft mods (mc-mods)</a></p>
+                </paper-material>
 
+                <paper-material>
+                  <h3>Update time</h3>
+                  <p>This database will be updated automatically on everyday, 00:00 GMT.</p>
+                  <p>However, as update script contains some synchronize function, Server respond will become slower than normal</p>
+                </paper-material>
 
-            </div>
+                <hr>
 
-            <div data-route="/docs/error">
-              <paper-material>
+                <h2>API content</h2>
+                <paper-material>
+                  <p><a href="/docs/error">Error response</a></p>
+                  <p><a href="/docs/api">/api</a></p>
+                  <p><a href="/docs/api/v1">/api/v1</a></p>
+                  <p><a href="/docs/api/v1/tags">/api/v1/tags</a></p>
+                  <p><a href="/docs/api/v1/scope">/api/v1/:scope</a></p>
+                </paper-material>
 
-                <header>
-                  <paper-button raised noink class="green">200</paper-button>
-                  OK
-                </header>
-
-                <summary>
-                  <p>Request succeed. Assume return is correct.</p>
-                </summary>
-
-              </paper-material>
-
-              <paper-material>
-
-                <header>
-                  <paper-button raised noink class="red">400</paper-button>
-                  BAD Request
-                </header>
-
-                <summary>
-                  <p>Parameter given is incorrect.</p>
-                </summary>
-
-                <details>
-                  <p>Response type: JSON</p>
-                  <p>(Key) Message: Human-readable message pointing to the issue.</p>
-                </details>
-
-              </paper-material>
-
-              <paper-material>
-
-                <header>
-                  <paper-button raised noink class="red">404</paper-button>
-                  NOT Found
-                </header>
-
-                <summary>
-                  <p>You should know this...</p>
-                </summary>
-
-                <details>
-                  <p>Response type: Plain text</p>
-                  <p>Sorry. But I got a 404</p>
-                </details>
-
-              </paper-material>
-
-              <paper-material>
-
-                <header>
-                  <paper-button raised noink class="purple">500</paper-button>
-                  Internal Server Error
-                </header>
-
-                <summary>
-                  <p>Error in server. This occurs when database query fail or other reasons.</p>
-                </summary>
-
-                <details>
-                  <p>Response type: JSON</p>
-                  <p>(Key) Message: Human-readable message pointing to the issue.</p>
-                  <p>Please report issue in <a href="https://github.com/Holi0317/curse-project-search", target=_blank>github</a>
-                    if you believe this is a bug in the program, not because of misconfig of web server.</p>
-                </details>
-
-              </paper-material>
-            </div>
-
-            <div data-route="/docs/api">
-              <paper-material>
-
-                <header>
-                  <paper-button raised noink class="green">GET</paper-button>
-                  /api
-                </header>
-
-                <summary>
-                  <p>Version of the API.</p>
-                </summary>
-
-                <details>
-                  <h3>Result format</h3>
-                  <div class="table-responsive">
-                    @@include(markdown('./docs/root.md'))
-                  </div>
-                </details>
-
-              </paper-material>
-            </div>
-
-            <div data-route="/docs/api/v1">
-              <paper-material>
-
-                <header>
-                  <paper-button raised noink class="green">GET</paper-button>
-                  /api/v1
-                </header>
-
-                <summary>
-                  <p>Version of the API, and if this is the latest version.</p>
-                </summary>
-
-                <details>
-                  <h3>Result format</h3>
-                  <div class="table-responsive">
-                    @@include(markdown('./docs/v1.md'))
-                  </div>
-                </details>
-
-              </paper-material>
-            </div>
-
-            <div data-route="/docs/api/v1/tags">
-              <paper-material>
-
-                <header>
-                  <paper-button raised noink class="green">GET</paper-button>
-                  /api/v1/tags/:scope
-                </header>
-
-                <summary>
-                  <p>Get tags from curseforge</p>
-                </summary>
-
-                <details>
-                  <h3>Result format(JSON)</h3>
-                  <div class="table-responsive">
-                    @@include(markdown('./docs/tags.md'))
-                  </div>
-                </details>
-              </paper-material>
-            </div>
-
-            <div data-route="/docs/api/v1/scope">
-              <paper-material>
-
-                <header>
-                  <paper-button raised noink class="blue">HEAD</paper-button>
-                  /api/v1/:scope
-                </header>
-
-
-                <summary>
-                  <p>Some basic informations about database. </p>
-                </summary>
-
-                <details>
-                  <h3>Result header</h3>
-                  <p>Other API can also include these headers without noticing</p>
-                  <div class="table-responsive">
-                    @@include(markdown('./docs/result-header.md'))
-                  </div>
-                </details>
-              </paper-material>
-
-              <paper-material>
-
-                <header>
-                  <paper-button raised noink class="green">GET</paper-button>
-                  /api/v1/:scope
-                </header>
-
-                <summary>
-                  <p>List and search all cached scope.</p>
-                </summary>
-
-                <details>
-                  <h3>Query parameter</h3>
-                  <p>If undefined is passed in, default will be used</p>
-                  <p>Searching is done by <a href="https://github.com/krisk/Fuse" target="_blank">fuse.js</a> instead of mongodb. Therefore fuzzy search is always available</p>
-                  <div class="table-responsive">
-                    @@include(markdown('./docs/request-query.md'))
-                  </div>
-                  <p>* downloadcount: This is sorted by decending order</p>
-                  <p>** score: score means how similar the string is according to
-                    <a href="https://en.wikipedia.org/wiki/Bitap_algorithm" target="_blank">Bitap algorithm</a>.
-                    This is done by the <a href="https://github.com/krisk/Fuse" target="_blank">fuse.js</a> library.
-                    If search is none, this will return random result as this sorting is not done in database.
-                  </p>
-                  <h3>Result format (JSON)</h3>
-                  <div class="table-responsive">
-                    @@include(markdown('./docs/respond.md'))
-                  </div>
-                </details>
-
-              </paper-material>
-            </div>
-
-
-
-            <div data-route="/about" content>
-              <h2>About this tool</h2>
-              <p> Provides an API for curseforge, better searching function. </p>
-              <p> Currently, only <a href="http://minecraft.curseforge.com/mc-mods">mc-mods</a> form curse is supported </p>
-              <p> All functions are on the right hand side. Feel free to try them ;)</p>
-              <p> Also, this project is an open source project. You can grab the source form <a href="https://github.com/holi0317/curse-project-search"> Github</a></p>
-            </div>
-
-            <div data-route="404" content>
-              <paper-material>
-                <p> Curse has crashed </p>
-                <witty-comments></witty-comments>
-                <p> Sorry for getting error 404. Hope this does not broke anything important ;) </p>
               </div>
-            </paper-material>
-          </iron-pages>
 
-        </paper-scroll-header-panel>
+              <div data-route="/docs/error">
+                <paper-material>
 
-      </paper-drawer-panel>
+                  <header>
+                    <paper-button raised noink class="green">200</paper-button>
+                    OK
+                  </header>
 
-    </template>
+                  <summary>
+                    <p>Request succeed. Assume return is correct.</p>
+                  </summary>
 
-  </body>
-  </html>
+                </paper-material>
+
+                <paper-material>
+
+                  <header>
+                    <paper-button raised noink class="red">400</paper-button>
+                    BAD Request
+                  </header>
+
+                  <summary>
+                    <p>Parameter given is incorrect.</p>
+                  </summary>
+
+                  <details>
+                    <p>Response type: JSON</p>
+                    <p>(Key) Message: Human-readable message pointing to the issue.</p>
+                  </details>
+
+                </paper-material>
+
+                <paper-material>
+
+                  <header>
+                    <paper-button raised noink class="red">404</paper-button>
+                    NOT Found
+                  </header>
+
+                  <summary>
+                    <p>You should know this...</p>
+                  </summary>
+
+                  <details>
+                    <p>Response type: Plain text</p>
+                    <p>Sorry. But I got a 404</p>
+                  </details>
+
+                </paper-material>
+
+                <paper-material>
+
+                  <header>
+                    <paper-button raised noink class="purple">500</paper-button>
+                    Internal Server Error
+                  </header>
+
+                  <summary>
+                    <p>Error in server. This occurs when database query fail or other reasons.</p>
+                  </summary>
+
+                  <details>
+                    <p>Response type: JSON</p>
+                    <p>(Key) Message: Human-readable message pointing to the issue.</p>
+                    <p>Please report issue in <a href="https://github.com/Holi0317/curse-project-search", target=_blank>github</a>
+                      if you believe this is a bug in the program, not because of misconfig of web server.</p>
+                    </details>
+
+                  </paper-material>
+                </div>
+
+                <div data-route="/docs/api">
+                  <paper-material>
+
+                    <header>
+                      <paper-button raised noink class="green">GET</paper-button>
+                      /api
+                    </header>
+
+                    <summary>
+                      <p>Version of the API.</p>
+                    </summary>
+
+                    <details>
+                      <h3>Result format</h3>
+                      <div class="table-responsive">
+                        <marked-element>
+                          <script type="text/markdown">
+                          | Key | Description | Example |
+                          | ------------- | ------------- |
+                          | version | version of this tool. While the first digit is the latest API version | 1.1.0 |
+                          </script>
+                        </marked-element>
+                      </div>
+                    </details>
+
+                  </paper-material>
+                </div>
+
+                <div data-route="/docs/api/v1">
+                  <paper-material>
+
+                    <header>
+                      <paper-button raised noink class="green">GET</paper-button>
+                      /api/v1
+                    </header>
+
+                    <summary>
+                      <p>Version of the API, and if this is the latest version.</p>
+                    </summary>
+
+                    <details>
+                      <h3>Result format</h3>
+                      <div class="table-responsive">
+                        <marked-element>
+                          <script type="text/markdown">
+                          | Key | Description | Example |
+                          | ------------- | ------------- |
+                          | version | version of this tool. While the first digit is the latest API version | 1.1.0 |
+                          | departed | If this is the latest version, false. Otherwise, true. | false |
+                          </script>
+                        </marked-element>
+                      </div>
+                    </details>
+
+                  </paper-material>
+                </div>
+
+                <div data-route="/docs/api/v1/tags">
+                  <paper-material>
+
+                    <header>
+                      <paper-button raised noink class="green">GET</paper-button>
+                      /api/v1/tags/:scope
+                    </header>
+
+                    <summary>
+                      <p>Get tags from curseforge</p>
+                    </summary>
+
+                    <details>
+                      <h3>Result format(JSON)</h3>
+                      <div class="table-responsive">
+                        <marked-element>
+                          <script type="text/markdown">
+                          | Key | Type | Description |
+                          | --- | --- | --- |
+                          | tags | Array of Objects | Tags listed in curseforge. While key is human-readable name and value is the link to that tag |
+                          </script>
+                        </marked-element>
+                      </div>
+                    </details>
+                  </paper-material>
+                </div>
+
+                <div data-route="/docs/api/v1/scope">
+                  <paper-material>
+
+                    <header>
+                      <paper-button raised noink class="blue">HEAD</paper-button>
+                      /api/v1/:scope
+                    </header>
+
+
+                    <summary>
+                      <p>Some basic informations about database. </p>
+                    </summary>
+
+                    <details>
+                      <h3>Result header</h3>
+                      <p>Other API can also include these headers without noticing</p>
+                      <div class="table-responsive">
+                        <marked-element>
+                          <script type="text/markdown">
+                          | Key | Description | Example |
+                          | --- | --- | --- |
+                          | Last-Modified | Last update time of the database | 2015-07-26T00:00:02.185Z |
+                          | X-length | Length of all scoped mods. Query parameter does NOT affect the result. | 1131 |
+                          </script>
+                        </marked-element>
+                      </div>
+                    </details>
+                  </paper-material>
+
+                  <paper-material>
+
+                    <header>
+                      <paper-button raised noink class="green">GET</paper-button>
+                      /api/v1/:scope
+                    </header>
+
+                    <summary>
+                      <p>List and search all cached scope.</p>
+                    </summary>
+
+                    <details>
+                      <h3>Query parameter</h3>
+                      <p>If undefined is passed in, default will be used</p>
+                      <p>Searching is done by <a href="https://github.com/krisk/Fuse" target="_blank">fuse.js</a> instead of mongodb. Therefore fuzzy search is always available</p>
+                      <div class="table-responsive">
+                        <marked-element>
+                          <script type="text/markdown">
+                          | Key | Accepted value | Description | Default |
+                          | --- | --- | --- | --- |
+                          | sort | 'fancyname', 'id', 'author', 'downloadCount'\*, 'score'\*\* | Sort result by this | 'downloadCount' |
+                          | limit | Number larger than 0, 'all' | Limit result being returned. This will not work if search have any string | 10 |
+                          | search | String, length less than 32 | Search fancyName by this. If undefined, list all. The first letter must be the same, for performance sake. | undefined |
+                          | threshold | A number between 0.0 and 1.0 | If search is defined, this will be sent to fuse.js as threshold | 0.6 |
+                          </script>
+                        </marked-element>
+                      </div>
+                      <p>* downloadcount: This is sorted by decending order</p>
+                      <p>** score: score means how similar the string is according to
+                        <a href="https://en.wikipedia.org/wiki/Bitap_algorithm" target="_blank">Bitap algorithm</a>.
+                        This is done by the <a href="https://github.com/krisk/Fuse" target="_blank">fuse.js</a> library.
+                        If search is none, this will return random result as this sorting is not done in database.
+                      </p>
+                      <h3>Result format (JSON)</h3>
+                      <div class="table-responsive">
+                        <marked-element>
+                          <script type="text/markdown">
+                          | Key | Type | Description | Sample Response |
+                          | --- | --- | --- | --- |
+                          | id_ | Number | Id in curse(forge) | 223628 |
+                          | slug | String | Slug of that mod in curse(forge) | thaumcraft |
+                          | fancyName | String | Name displayed | Thaumcraft |
+                          | description | String | description from curse | Thaumaturgy is the capability of a magician to work miracles..... |
+                          | author | String | Author of the mod | azanor |
+                          | downloadCount | Number | Download count from curse | 1052980 |
+                          | tags | Array of String | Tags applied to this mod. String are actually links to the tag | ["mc-mods/magic","mc-mods/adventure-rpg","mc-mods/armor-weapons-tools","mc-mods/cosmetic","mc-mods/library-api"] |
+                          </script>
+                        </marked-element>
+                      </div>
+                    </details>
+
+                  </paper-material>
+                </div>
+
+
+
+                <div data-route="/about" content>
+                  <h2>About this tool</h2>
+                  <p> Provides an API for curseforge, better searching function. </p>
+                  <p> Currently, only <a href="http://minecraft.curseforge.com/mc-mods">mc-mods</a> form curse is supported </p>
+                  <p> All functions are on the left hand side. Feel free to try them ;)</p>
+                  <p> Also, this project is an open source project. You can grab the source form <a href="https://github.com/holi0317/curse-project-search"> Github</a></p>
+                </div>
+
+                <div data-route="404" content>
+                  <paper-material>
+                    <p> Curse has crashed </p>
+                    <witty-comments></witty-comments>
+                    <p> Sorry for getting error 404. Hope this does not broke anything important ;) </p>
+                  </div>
+                </paper-material>
+              </iron-pages>
+
+            </paper-scroll-header-panel>
+
+          </paper-drawer-panel>
+
+        </template>
+
+      </body>
+      </html>

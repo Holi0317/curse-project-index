@@ -40,6 +40,7 @@
     "paper-menu-button": "PolymerElements/paper-menu-button#~1.0.0",
     "paper-spinner": "PolymerElements/paper-spinner#~1.0.2",
     "paper-fab": "PolymerElements/paper-fab#~1.0.3",
-    "paper-dropdown-menu": "PolymerElements/paper-dropdown-menu#~1.0.1"
+    "paper-dropdown-menu": "PolymerElements/paper-dropdown-menu#~1.0.1",
+    "marked-element": "PolymerElements/marked-element#~1.0.2"
   }
 }

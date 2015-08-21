@@ -4,7 +4,6 @@
   var $ = require('gulp-load-plugins')();
   var del = require('del');
   var runSequence = require('run-sequence');
-  var markdown = require('marked');
 
   gulp.task('vulcanize', function () {
     return gulp.src('app/elements/elements.html')
@@ -17,13 +16,6 @@
 
   gulp.task('html', function () {
     return gulp.src('app/index.html')
-    .pipe($.fileInclude({
-      prefix: '@@',
-      basepath: '@file',
-      filters: {
-        markdown: markdown
-      }
-    }))
     .pipe($.htmlmin({
       removeComments: true,
       collapseWhitespace: true,
