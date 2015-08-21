@@ -1,4 +1,4 @@
-# curse-project-search
+# curse-project-index
 Make searching in [curseforge](http://minecraft.curseforge.com/mc-mods) more powerful than before
 
 ## Introduction

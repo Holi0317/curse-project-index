@@ -1,11 +1,11 @@
 {
-  "name": "curse-project-search",
+  "name": "curse-project-index",
   "version": "1.1.0",
   "authors": [
     "Holi0317 <holliswuhollis@gmail.com>"
   ],
-  "description": "An unoffical API for curse. Also provides fuzzy search ability",
-  "repository": "holi0317/curse-project-search",
+  "description": "An unoffical API for curse.",
+  "repository": "holi0317/curse-project-index",
   "moduleType": [
     "node"
   ],
