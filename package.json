@@ -5,7 +5,8 @@
   "license": "MIT",
   "repository": "holi0317/curse-project-search",
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "install": "bower prune && npm prune && bower i && gulp && node job"
   },
   "dependencies": {
     "async": "^1.4.2",

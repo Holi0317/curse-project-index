@@ -22,13 +22,12 @@ TL;DR: Major is API version, Minor means new function and patch means function c
 
 ## Deploy your own
 1. Install `node.js, npm, mongodb, git` in your system.
-2. Run `npm i -g bower`. you may need to add `sudo` as prefix if you need it.
-3. Clone this repository
-4. Goto the cloned directory and run `bower i && npm i --dev && gulp`
-5. Run mongodb in your system. Please check your distro's wiki for details.
-6. Run `node job` to manually update the database.
-7. Run `npm start` to run the server.
-8. Done ;)
+2. Run `npm i -g bower gulp`. you may need to add `sudo` as prefix if you need it.
+3. Run mongodb in your system. Please check your distro's wiki for details.
+4. Clone this repository
+5. Goto the cloned directory and run `npm i --dev`
+6. Run `npm start` to run the server.
+7. Done ;)
 
 ## Update
 1. Run `git pull` to fetch the latest update
