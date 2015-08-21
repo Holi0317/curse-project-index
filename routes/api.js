@@ -7,13 +7,13 @@ var mcMods = require('./apiv1/mc-mods');
 // API version 1
 router.get('/', function(req, res, next) {
   res.json({
-    'version': '1.1.0'
+    'version': '1.1.1'
   });
 });
 
 router.get('/v1', function (req, res, next) {
   res.json({
-    'version': '1.1.0',
+    'version': '1.1.1',
     'departed': false
   });
 });
