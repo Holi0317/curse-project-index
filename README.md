@@ -25,7 +25,7 @@ TL;DR: Major is API version, Minor means new function and patch means function c
 2. Run `npm i -g bower gulp`. you may need to add `sudo` as prefix if you need it.
 3. Run mongodb in your system. Please check your distro's wiki for details.
 4. Clone this repository
-5. Goto the cloned directory and run `npm i --dev`
+5. Goto the cloned directory and run `npm i`
 6. Run `npm start` to run the server.
 7. Done ;)
 
